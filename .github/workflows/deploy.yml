@@ -1,0 +1,35 @@
+name: Deploy BeatBuddy Backend
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+
+      - name: GHCR 로그인
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker 이미지 빌드 & Push
+        run: |
+          docker build -t ghcr.io/huisu73/beatbuddy-backend:latest .
+          docker push ghcr.io/huisu73/beatbuddy-backend:latest
+
+      - name: 서버 배포
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd ~/beatbuddy
+            docker-compose pull
+            docker-compose up -d
