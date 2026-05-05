@@ -15,7 +15,7 @@ public class JwtUtil {
     private static final long refreshExpiration = 1000L * 60L * 60L * 24L * 7L; // 7일
 
     // 생성자에서 key 만들기
-    public JwtUtil(@Value("${jwt.secret}") String secret) {
+    public JwtUtil(@Value("${JWT_SECRET}") String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
