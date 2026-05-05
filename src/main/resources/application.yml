@@ -52,10 +52,6 @@ file:
   default-profile: /default-profile.jpg
   default-group: /default-group.jpg
 
-spotify:
-  client-id: ${spotify.client-id}
-  client-secret: ${spotify.client-secret}
-
 app:
   group:
     default-image-url: https://cdn-icons-png.flaticon.com/512/82/82750.png
