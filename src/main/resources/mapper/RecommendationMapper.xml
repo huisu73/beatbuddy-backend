@@ -52,10 +52,9 @@
             u.profile_image_url AS profileImageUrl,
             u.gender,
             u.birth_year        AS birthYear,
-            VEC_DISTANCE(
-                (SELECT taste_vector FROM user_profiles WHERE user_id = #{myUserId}),
-                up.taste_vector,
-                'euclidean'
+            VEC_DISTANCE_EUCLIDEAN(
+                (SELECT taste_vector FROM user_profiles WHERE user_id = ?),
+                up.taste_vector
             ) AS similarityScore,
             mf.music_id         AS musicId,
             mf.track_name       AS trackName,
