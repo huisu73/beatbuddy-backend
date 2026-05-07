@@ -54,7 +54,8 @@
             u.birth_year        AS birthYear,
             VEC_DISTANCE(
                 (SELECT taste_vector FROM user_profiles WHERE user_id = #{myUserId}),
-                up.taste_vector
+                up.taste_vector,
+                'euclidean'
             ) AS similarityScore,
             mf.music_id         AS musicId,
             mf.track_name       AS trackName,
