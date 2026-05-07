@@ -1,3 +1,4 @@
+# CI/CD TEST
 # 1단계 - 빌드
 FROM gradle:8.5-jdk21 AS builder
 WORKDIR /app
