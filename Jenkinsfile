@@ -64,7 +64,7 @@ pipeline {
                             parameters: [
                                 string(name: 'DOCKER_IMAGE_VERSION', value: "${DOCKER_IMAGE_VERSION}")
                             ],
-                            wait: true
+                            wait: false
                     }
                 }
             }
